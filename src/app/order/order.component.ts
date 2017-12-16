@@ -18,6 +18,8 @@ export class OrderComponent implements OnInit {
 
   delivery: number = 8
 
+  orderId: string
+
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   numberPattern = /^[0-9]*$/
 
@@ -79,11 +81,18 @@ export class OrderComponent implements OnInit {
     order.orderItems = this.cartItems()
       .map((item:CartItem)=>new OrderItem(item.quantity, item.menuItem.id))
 
-      this.orderService.checkOrder(order).subscribe((orderId: string) => {
-        this.router.navigate(['/order-summary'])
-        console.log(`Compra Concluída: ${orderId}`)
-        this.orderService.clear()
+      this.orderService.checkOrder(order)
+        .do((orderId: string) => {
+          this.orderId = orderId
+        })
+        .subscribe((orderId: string) => {
+          this.router.navigate(['/order-summary'])
+          this.orderService.clear()
       })
+  }
+
+  isOrderCompleted(): boolean {
+    return this.orderId !== undefined
   }
 
 }

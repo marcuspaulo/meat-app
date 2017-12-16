@@ -1,3 +1,4 @@
+import { LeaveOrderGuard } from './../order/leave-order.guard';
 import { LoginService } from './../security/login/login.services';
 import { ShoppingCartService } from 'app/restaurant-detail/shopping-cart/shopping-cart.service';
 import { RatingComponent } from './rating/rating.component';
@@ -22,7 +23,8 @@ export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [ShoppingCartService, RestaurantsService, OrderService, NotificationService, LoginService, LoggedInGuard]
+            providers: [ShoppingCartService, RestaurantsService, OrderService, 
+                        NotificationService, LoginService, LoggedInGuard, LeaveOrderGuard]
         }
     }
 }

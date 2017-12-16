@@ -71,6 +71,18 @@ Todas as imagens usadas na aplicação são pertencentes a freepik.com
 `Quando o app está em outra pasta`
 `ng build --prod --bh=/meat/`
 
+Não há essa opção, apenas com o parâmetro do build no angular-cli. Você pode minimizar essa falta com configurações de build na seção "scripts" do package.json. Exemplo:
+
+"scripts": {
+    "ng": "ng",
+    ...
+    "build:dev":"ng build",
+    "build:prod":"ng build --prod --bh /my-app"
+  }
+E executar:
+
+npm run build:prod  ou com outro nome/configuração.
+
 ## Para testar (Não recomendado para produção)
 `Ir até a pasta dist`
 `python -m SimpleHTTPServer 8000`
